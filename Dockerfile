@@ -15,6 +15,6 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 RUN cd /letsencrypt && git clone https://github.com/letsencrypt/letsencrypt && letsencrypt/letsencrypt-auto --help
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-EXPOSE 22
+EXPOSE 22 80 443
 
 CMD ["/usr/bin/supervisord"]
