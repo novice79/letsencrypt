@@ -12,7 +12,7 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-RUN cd /letsencrypt && git clone https://github.com/letsencrypt/letsencrypt && letsencrypt/letsencrypt-auto
+RUN cd /letsencrypt && git clone https://github.com/letsencrypt/letsencrypt && letsencrypt/letsencrypt-auto --help
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 22
