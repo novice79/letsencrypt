@@ -1,2 +1,2 @@
-* * * * * root /letsencrypt/letsencrypt-auto renew >> /var/log/lep/renew.log 2>&1
+0 0 0 * * root /letsencrypt/letsencrypt-auto renew >> /var/log/lep/renew.log 2>&1
 # An empty line is required at the end of this file for a valid cron file.
