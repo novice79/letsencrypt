@@ -3,11 +3,11 @@ MAINTAINER david <david@cninone.com>
 # for build nghttp2
 RUN apt-get update && apt-get install -y g++ make binutils autoconf automake autotools-dev libtool pkg-config \
     zlib1g-dev libcunit1-dev libssl-dev libxml2-dev libev-dev libevent-dev libjansson-dev \
-    libjemalloc-dev cython python3-dev python-setuptools
+    libjemalloc-dev cython python3-dev python-setuptools git
 RUN cd / && git clone https://github.com/nghttp2/nghttp2.git && cd nghttp2 \
     && autoreconf -i && automake && autoconf && ./configure && make && make install && make clean
     
-RUN  apt-get install -y software-properties-common python-software-properties openssh-server supervisor git \
+RUN  apt-get install -y software-properties-common python-software-properties openssh-server supervisor  \
     vim cron curl squid3 \
     && apt-get clean && apt-get autoclean && apt-get remove
 RUN mkdir /var/run/sshd /var/log/lep
