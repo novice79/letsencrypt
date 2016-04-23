@@ -22,7 +22,7 @@ RUN chmod 0644 /etc/cron.d/gc-cron \
     && touch /var/log/cron.log
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-EXPOSE 22 80
+EXPOSE 22 80 443
 
 COPY init.sh /
 ENTRYPOINT ["/init.sh"]
