@@ -1,10 +1,9 @@
 # letsencrypt
-just for letsencrypt in docker
+for letsencrypt auto renew
 
 # usage
-docker run -it --rm -p 80:80 --name letsencrypt \
+docker run -d -p 80:80 --name le \
 -v "/etc/letsencrypt:/etc/letsencrypt" \
 -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
-novice/letsencrypt:latest
-**and then**
-letsencrypt certonly --standalone --agree-tos --email xx@xxx.com -d xxx.com
+-t novice/letsencrypt:latest --email xx@xxx.com -d xxx.com
+
