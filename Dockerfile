@@ -4,7 +4,7 @@ MAINTAINER david <david@cninone.com>
 RUN apt-get update && apt-get install -y software-properties-common python-software-properties openssh-server supervisor git \
     vim cron curl \
     && apt-get clean && apt-get autoclean && apt-get remove
-RUN mkdir /var/run/sshd
+RUN mkdir /var/run/sshd /var/log/lep
 RUN echo 'root:freego' | chpasswd
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
