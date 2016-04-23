@@ -1,8 +1,14 @@
 FROM ubuntu:latest
 MAINTAINER david <david@cninone.com>
-
+# for build nghttp2
+RUN apt-get install -y g++ make binutils autoconf automake autotools-dev libtool pkg-config \
+    zlib1g-dev libcunit1-dev libssl-dev libxml2-dev libev-dev libevent-dev libjansson-dev \
+    libjemalloc-dev cython python3-dev python-setuptools
+RUN cd / && git clone https://github.com/nghttp2/nghttp2.git && cd nghttp2 \
+    && autoreconf -i && automake && autoconf && ./configure && make && make install
+    
 RUN apt-get update && apt-get install -y software-properties-common python-software-properties openssh-server supervisor git \
-    vim cron curl \
+    vim cron curl squid3 \
     && apt-get clean && apt-get autoclean && apt-get remove
 RUN mkdir /var/run/sshd /var/log/lep
 RUN echo 'root:freego' | chpasswd
@@ -22,6 +28,7 @@ RUN chmod 0644 /etc/cron.d/gc-cron \
     && touch /var/log/cron.log
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY squid.conf /etc/squid3/squid.conf
 EXPOSE 22 80 443
 
 COPY init.sh /
