@@ -1,0 +1,1 @@
+letsencrypt certonly --standalone --agree-tos --email xx@xxx.com -d xxx.com
