@@ -1,3 +1,20 @@
 letsencrypt certonly --standalone --agree-tos --email xx@xxx.com -d xxx.com
 
-docker build -t novice/le .
+for var in "$@"
+do
+    echo "$var"
+done
+
+foo="Hello"
+foo="$foo World"
+echo $foo
+> Hello World
+
+In general to concatenate two variables you can just write them one after another:
+a='hello'
+b='world'
+c=$a$b
+echo $c
+> helloworld
+
+kill -HUP 81 82

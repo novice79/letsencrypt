@@ -8,9 +8,9 @@ RUN cd / && git clone https://github.com/nghttp2/nghttp2.git && cd nghttp2 \
     && autoreconf -i && automake && autoconf && ./configure && make && make install && make clean
     
 RUN  apt-get install -y software-properties-common python-software-properties openssh-server supervisor  \
-    vim cron curl squid3 \
+    vim cron curl squid3 stunnel4 \
     && apt-get clean && apt-get autoclean && apt-get remove
-RUN mkdir /var/run/sshd /var/log/lep
+RUN mkdir -p /var/run/sshd /var/log/lep /etc/nghttpx
 RUN echo 'root:freego' | chpasswd
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
@@ -29,7 +29,9 @@ RUN chmod 0644 /etc/cron.d/gc-cron \
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY squid.conf /etc/squid3/squid.conf
-EXPOSE 22 80 443
+COPY nghttpx.conf /etc/nghttpx/nghttpx.conf
+COPY stunnel.conf /etc/stunnel/stunnel.conf
+EXPOSE 22 80 443 1979
 
 COPY init.sh /
 ENTRYPOINT ["/init.sh"]
