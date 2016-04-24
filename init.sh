@@ -21,6 +21,7 @@ for d in /etc/letsencrypt/live/* ; do
   if [ -d "$d" ]; then
     echo -e "private-key-file=$d/privkey.pem" >> /etc/nghttpx/nghttpx.conf
     echo -e "certificate-file=$d/fullchain.pem" >> /etc/nghttpx/nghttpx.conf
+    echo -e "key=$d/privkey.pem" >> /etc/stunnel/stunnel.conf
     echo -e "cert=$d/fullchain.pem" >> /etc/stunnel/stunnel.conf
   fi
 done
